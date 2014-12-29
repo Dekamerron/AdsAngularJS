@@ -1,0 +1,23 @@
+.lightblue {
+  background-color: #5b9ad0;
+}
+
+.padding-top-bottom-10 {
+	padding: 10px 0;
+}
+
+.margin-top-bottom-10 {
+	margin: 10px 0;
+}
+
+.font-weight-bold {
+	font-weight: bold;
+}
+
+.border-radius-5 {
+	border-radius: 5px;
+}
+
+.pull-right {
+	float: right;
+}
