@@ -1,11 +1,14 @@
-var app = angular.module('app', ['ngRoute'])
+var app = angular.module('app', ['ngResource', 'ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider
-			.when('login', {
-				templateUrl: '_login.html'
+			.when('/', {
+				templateUrl: 'templates/_home.html'
 			})
-			.when('register', {
-				templateUrl: '_register.html'
+			.when('/login', {
+				templateUrl: 'templates/_login.html'
+			})
+			.when('/register', {
+				templateUrl: 'templates/_register.html'
 			})
 			.otherwise({
 				redirectTo: '/'

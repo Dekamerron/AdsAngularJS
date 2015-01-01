@@ -1,0 +1,35 @@
+<div class="container">
+	
+	<div class="col-lg-2 col-md-3 text-center lightblue">
+		<div class="margin-top-bottom-10 font-weight-bold">
+			To publish a new add, please login.
+		</div>
+		<div class="margin-top-bottom-10">
+			<button class="btn btn-primary" ng-click="login()">Login</button>
+		</div>
+		<div class="margin-top-bottom-10">
+			<button class="btn btn-primary" ng-click="register()">Register</button>
+		</div>
+	</div>
+
+
+	<div class="col-lg-10 col-md-9">
+		<div class="well" ng-repeat="ad in data.ads">
+			<div class="row">
+				<span ng-bind="ad.title"></span>
+				<span class="pull-right">{{ad.date | date:'dd-MMM-yyyy'}}</span>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<!-- <img ng-src="{{base64_encode(add.imageDataUrl)}}" alt="Add photo"> -->
+					<!-- <div ng-style="convertImage(add.imageDataUrl)"></div> -->
+					<div>{{add.imageDataUrl}}</div>
+				</div>
+				<div class="col-lg-8">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

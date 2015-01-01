@@ -1,4 +1,4 @@
-app.factory('adsServices', function ($http) {
+app.factory('adsServices', function ($resource, $http) {
 	function getAllAds (success, error) {
 		$http({
 			method: 'GET',
