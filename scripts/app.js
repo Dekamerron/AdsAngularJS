@@ -1,8 +1,10 @@
+'use strict';
+
 var app = angular.module('app', ['ngResource', 'ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: 'templates/_home.html'
+				templateUrl: 'templates/_homeViewUnregistered.html'
 			})
 			.when('/login', {
 				templateUrl: 'templates/_login.html'

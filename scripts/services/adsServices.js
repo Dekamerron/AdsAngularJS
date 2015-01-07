@@ -1,3 +1,5 @@
+'use strict';
+
 app.factory('adsServices', function ($resource, $http) {
 	function getAllAds (success, error) {
 		$http({

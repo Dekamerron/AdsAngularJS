@@ -1,6 +1,6 @@
 <div class="container">
 	
-	<div class="col-lg-2 col-md-3 text-center lightblue">
+	<aside class="col-lg-2 col-md-3 text-center lightblue">
 		<div class="margin-top-bottom-10 font-weight-bold">
 			To publish a new add, please login.
 		</div>
@@ -10,11 +10,10 @@
 		<div class="margin-top-bottom-10">
 			<button class="btn btn-primary" ng-click="register()">Register</button>
 		</div>
-	</div>
-
+	</aside>
 
 	<div class="col-lg-8 col-md-9">
-		<div class="well" ng-repeat="ad in data.ads | filter:townId:categoryId">
+		<div class="well" ng-repeat="ad in data.ads | filter:townAndCategoryFilter">
 			<div class="row margin-bottom-20 margin-left-right-0">
 				<span ng-bind="ad.title"></span>
 				<span class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</span>
@@ -60,32 +59,19 @@
 	</div>
 
 	<div class="col-lg-2 col-md-2">
+
 		<fieldset>
-			<legend>Categories</legend>			
-			<ul class="nav nav-pills nav-stacked menu">	
-				<li ng-class="{'active': categoryIndex == -1}">
-					<a href="" ng-click="categoryClicked(-1)">All</a>
-				</li>			
-				<li ng-repeat="category in categories" ng-class="{'active': categoryIndex == $index}">
-					<a href="" ng-click="categoryClicked(category, $index)">
-						{{category.name}} {{category.id}}
-					</a>					
-				</li>
-			</ul>
+			<legend>Categories {{categoryId}}</legend>	
+			<select ng-model="categoryId" ng-options="category.id as category.name for category in categories" class="form-control">
+				<option value="">All</option>
+			</select>
 		</fieldset>
 
 		<fieldset>
-			<legend>Towns</legend>
-			<ul class="nav nav-pills nav-stacked menu">	
-				<li ng-class="{'active': townIndex == -1}">
-					<a href="" ng-click="townClicked(-1)">All</a>
-				</li>			
-				<li ng-repeat="town in towns" ng-class="{'active': townIndex == $index}">
-					<a href="" ng-click="townClicked(town, $index)">
-						{{town.name}} {{town.id}}
-					</a>					
-				</li>
-			</ul>
+			<legend>Towns {{townId}}</legend>
+			<select ng-model="townId" ng-options="town.id as town.name for town in towns" class="form-control">
+				<option value="">All</option>
+			</select>
 		</fieldset>
 	</div>
 

@@ -7,20 +7,25 @@
 	<link rel="stylesheet" href="styles/adsStyles.css">
 	<title>Ads</title>
 </head>
-<body ng-app="app" ng-controller="AdsController">	
-	<div class="col-lg-12 margin-bottom-20 lightblue text-center padding-top-bottom-10 font-weight-bold">
-		<div>
-			Ads - Home
+<body ng-app="app" ng-controller="AdsController">
+	<div class="wrapper">
+		<div class="col-lg-12 margin-bottom-20 lightblue text-center padding-top-bottom-10 font-weight-bold">
+			<div>
+				Ads - Home
+			</div>
 		</div>
-	</div>
 
-	<div ng-view="">
-		
+		<div ng-view=""></div>
 	</div>
 	
+	<footer class="col-lg-12 lightblue text-center font-weight-bold">
+		<p>© 2014 by Software University Foundation, No Rights Reserved</p>
+	</footer>
+
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-route.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
+	<script src="lib/angular/angular-loader.js"></script>
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/adsController.js"></script>
 	<script src="scripts/services/adsServices.js"></script>
