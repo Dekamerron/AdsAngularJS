@@ -1,5 +1,26 @@
 <div class="container">
-	
-	<div>LOGIN</div>
-	<button ng-click="back()">Back</button>
+	<fieldset class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1">
+			<legend class="text-center">Login</legend>
+		<form data-toggle="validator" class="form-horizontal" name="registerForm" role="form" novalidate="novalidate">
+			<div class="form-group">
+			  <label for="username" class="col-lg-4 col-md-4 control-label">Username</label>
+				<div class="col-lg-6 col-md-6">
+			    	<input ng-model="login.username" type="text" class="form-control" id="username" placeholder="Username" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-lg-4 col-md-4 control-label">Password</label>
+				<div class="col-lg-6 col-md-6">
+					<input ng-model="login.password" type="password" class="form-control" id="password" placeholder="Password" required>
+				</div>
+			</div>
+
+			<div class="form-group">
+			    <div class="col-lg-offset-4 col-md-offset-4 col-lg-10 col-md-10">
+			    	<button ng-click="back()" type="btn" class="btn btn-default">Cancel</button>
+			    	<button ng-click="login()" type="btn" class="btn btn-primary">Login</button>
+			    </div>
+			</div>
+		</form>
+	</fieldset>
 </div>

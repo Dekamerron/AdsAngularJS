@@ -1,10 +1,13 @@
 'use strict';
 
-app.controller('AdsController', ['$scope', '$location', 'adsServices', function ($scope, $location, adsServices) {
+app.controller('AdsController', ['$scope', '$location', 'adsServices', 'userServices', 
+	function ($scope, $location, adsServices, userServices) {
 	
 	$scope.loader = {};
 	$scope.townId = 0;
 	$scope.categoryId = 0;
+	$scope.user = {};
+	$scope.login = {};
 
 	adsServices.getAllAds(
 		function (data, status, headers, config) {
@@ -38,11 +41,11 @@ app.controller('AdsController', ['$scope', '$location', 'adsServices', function 
 		}
 	);
 
-	$scope.login = function () {
+	$scope.redirectTologin = function () {
 		$location.path('/login');
 	};
 
-	$scope.register = function () {
+	$scope.redirectToRegister = function () {
 		$location.path('/register');
 	};
 
@@ -87,6 +90,11 @@ app.controller('AdsController', ['$scope', '$location', 'adsServices', function 
 		} else {
 			return false;
 		}
+	};
+
+	$scope.register = function () {
+		// console.log($scope.user);
+		userServices.registerUser($scope.user);
 	};
 
 }]);

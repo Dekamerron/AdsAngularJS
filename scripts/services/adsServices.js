@@ -1,10 +1,11 @@
 'use strict';
 
-app.factory('adsServices', function ($resource, $http) {
+app.factory('adsServices', ['$resource', '$http', 'baseServiceUrl', function ($resource, $http, baseServiceUrl) {
+
 	function getAllAds (success, error) {
 		$http({
 			method: 'GET',
-			url: 'http://softuni-ads.azurewebsites.net/api/ads?PageSize=20&Startpage=1'
+			url: baseServiceUrl + 'ads?PageSize=20&Startpage=1'
 		})
 		.success(function (data, status, headers, config) {
 			success(data, status, headers(), config);
@@ -17,7 +18,7 @@ app.factory('adsServices', function ($resource, $http) {
 	function getAllCategories (success, error) {
 		$http({
 			method: 'GET',
-			url: 'http://softuni-ads.azurewebsites.net/api/categories'
+			url:  baseServiceUrl + 'categories'
 		})
 		.success(function (data, status, headers, config) {
 			success(data, status, headers(), config);
@@ -30,7 +31,7 @@ app.factory('adsServices', function ($resource, $http) {
 	function getAllTowns (success, error) {
 		$http({
 			method: 'GET',
-			url: 'http://softuni-ads.azurewebsites.net/api/towns'
+			url: baseServiceUrl + 'towns'
 		})
 		.success(function (data, status, headers, config) {
 			success(data, status, headers(), config);
@@ -45,4 +46,4 @@ app.factory('adsServices', function ($resource, $http) {
 		getAllCategories: getAllCategories,
 		getAllTowns: getAllTowns
 	}
-});
+}]);

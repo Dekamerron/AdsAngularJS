@@ -43,3 +43,7 @@ html, body {
 	min-height: 100%;
 	margin-bottom: -30px; 
 }
+
+.btn {
+	min-width: 80px;
+}
