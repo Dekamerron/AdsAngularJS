@@ -27,7 +27,7 @@ app.controller('AdsController',
 		.$promise
 		.then(function (data) {
 			$scope.adsData = data;
-			// console.log(data);
+			console.log(data);
 		});
 	};
 

@@ -2,6 +2,20 @@
 
 var app = angular.module('app', ['ngResource', 'ngRoute', 'ui.bootstrap.pagination']);
 
+app.run(['$rootScope', '$location', 'authenticationService', function ($rootScope, $location, authenticationService) {
+	$rootScope.$on('$routeChangeStart', function (event, next) {
+        var userAuthenticated = authenticationService.isLoggedIn(); 
+
+        if (!userAuthenticated && !next.isLogin) {
+
+            $location.path('/');
+        } else if (userAuthenticated && next.isLogin) {
+
+        	$location.path('/user/home');
+        }
+    });
+}]);
+
 app.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net/api/');
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -39,13 +53,4 @@ app.config(['$routeProvider', function ($routeProvider) {
 		.otherwise({
 			redirectTo: '/'
 		});
-
-		// $rootScope.$on('$routeChangeStart', function (event, next) {
-	 //        var userAuthenticated = ...; 
-
-	 //        if (!userAuthenticated && !next.isLogin) {
-
-	 //            $location.path('/User/LoginUser');
-	 //        }
-	 //    });
 }]);

@@ -22,13 +22,6 @@ app.controller('UserController',
 		$scope.currentCategory = { id: 0, name: 'All categories' };
 		$scope.currentTown = { id: 0, name: 'All towns' };
 		
-		// adsService.getAllUserAds()
-		// .$promise
-		// .then(function (data) {
-		// 	$scope.allUserAds = data;
-		// 	// console.log(data);
-		// });
-		
 		adsService.getAllCategories()
 		.$promise
 		.then(function (data) {
@@ -234,17 +227,7 @@ app.controller('UserController',
 	        );
 	    };
 
-	    $rootScope.$on('$routeChangeStart', function (event, next) {
-	        var userAuthenticated = authenticationService.isLoggedIn(); 
-
-	        if (!userAuthenticated && !next.isLogin) {
-
-	            $location.path('/');
-	        } else if (userAuthenticated && next.isLogin) {
-
-	        	$location.path('/user/home');
-	        }
-	    });
+	    
 
 	    $scope.selectTown = function (town, register) {
 			$scope.currentTown = town;
@@ -267,10 +250,10 @@ app.controller('UserController',
 			});
 		};
 
-		$scope.$watch('allUserAds', function () {
-			if ($scope.allUserAds) {
-				console.log($scope.allUserAds.ads);
-			}
+		// $scope.$watch('allUserAds', function () {
+		// 	if ($scope.allUserAds) {
+		// 		console.log($scope.allUserAds.ads);
+		// 	}
 			
-		});
+		// });
 }]);
