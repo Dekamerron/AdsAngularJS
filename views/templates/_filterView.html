@@ -1,0 +1,47 @@
+<div class="col-lg-3 col-md-3">
+
+    <fieldset>
+        <legend class="text-center">Towns</legend>
+        <div class="form-group">
+            <div class="btn-group droppDownButton fullWidth">
+                <div data-toggle="dropdown" class="input-group fullWidth">
+                    <button ng-model="currentTown" type="button" class="btn btn-primary width-85-percent margin-left-btn white-space-normal">
+                            {{currentTown.name}}
+                    </button>
+                    <button type="button" class="btn btn-primary dropdown-toggle width-15-percent margin-right-btn">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                </div>
+                <ul class="dropdown-menu dropdown-inline-scrolled-absolute fullWidth" role="menu">
+                    <li ng-repeat="town in towns" class="dropDownItemBorder">
+                        <a ng-click="selectTown(town, false)">{{town.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend class="text-center">Categories</legend>
+        <div class="form-group">
+            <div class="btn-group droppDownButton fullWidth">
+                <div data-toggle="dropdown" class="input-group fullWidth">
+                    <button ng-model="currentCategory" type="button" class="btn btn-primary width-85-percent margin-left-btn white-space-normal">
+                        {{currentCategory.name}}
+                    </button>
+                    <button type="button" class="btn btn-primary dropdown-toggle width-15-percent margin-right-btn">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                </div>
+                <ul class="dropdown-menu dropdown-inline-scrolled-absolute fullWidth" role="menu">
+                    <li ng-repeat="category in categories" class="dropDownItemBorder">
+                        <a ng-click="selectCategory(category)">{{category.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </fieldset>
+    
+</div>

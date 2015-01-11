@@ -1,0 +1,9 @@
+<div class="col-lg-12 margin-bottom-20 lightblue text-center padding-top-bottom-10 font-weight-bold">
+	<div>
+		Ads - {{currentPage}}
+		<span ng-if="isLoggedIn" class="pull-right padding-right-10">
+			{{userData.username}}
+			<a href="" ng-click="logout()">Logout</a>
+		</span>
+	</div>
+</div>

@@ -1,5 +1,9 @@
+<div ng-include="'views/templates/_headerView.html'"></div>
+
 <div class="container">
-	<fieldset class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1">
+	<div ng-include="'views/templates/_loginRegisterView.html'"></div>
+
+	<fieldset class="col-lg-8 col-md-8">
 			<legend class="text-center">User Registration</legend>
 		<form data-toggle="validator" class="form-horizontal" name="registerForm" role="form" novalidate="novalidate">
 			<div class="form-group">
@@ -41,15 +45,28 @@
 			<div class="form-group">
 				<label for="town" class="col-lg-4 col-md-4 control-label">Town</label>
 			  	<div class="col-lg-6 col-md-6">
-			    	<select ng-model="user.townId" ng-options="town.id as town.name for town in towns" id="town" class="form-control" required>
-			    		<option value="">Select town</option>
-					</select>
+					<div class="btn-group droppDownButton fullWidth">
+		                <div data-toggle="dropdown" class="input-group fullWidth">
+		                    <button ng-model="currentRegisterTown" type="button" class="btn btn-primary width-85-percent margin-left-btn white-space-normal">
+		                            {{currentRegisterTown.name}}
+		                    </button>
+		                    <button type="button" class="btn btn-primary dropdown-toggle width-15-percent margin-right-btn">
+		                        <span class="caret"></span>
+		                        <span class="sr-only">Toggle Dropdown</span>
+		                    </button>
+		                </div>
+		                <ul class="dropdown-menu dropdown-inline-scrolled-absolute fullWidth" role="menu">
+		                    <li ng-repeat="town in registerTowns" class="dropDownItemBorder">
+		                        <a ng-click="selectTown(town, true)">{{town.name}}</a>
+		                    </li>
+		                </ul>
+		            </div>
 			  	</div>
 			</div>
 
 			<div class="form-group">
-			    <div class="col-lg-offset-4 col-md-offset-4 col-lg-10 col-md-10">
-			    	<button ng-click="back()" type="btn" class="btn btn-default">Cancel</button>
+			    <div class="col-lg-offset-4 col-md-offset-4 col-lg-10 col-md-10 margin-bottom-50">
+			    	<button ng-click="cancel()" type="btn" class="btn btn-default">Cancel</button>
 			    	<button ng-click="register()" type="btn" class="btn btn-primary" ng-disabled="registerForm.$invalid">Register</button>
 			    </div>
 			</div>

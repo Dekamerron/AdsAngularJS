@@ -1,0 +1,13 @@
+<div ng-include="'views/templates/_headerView.html'"></div>
+
+<div class="container">
+
+	<div ng-include="'views/templates/_userNavigationView.html'"></div>
+
+	<div ng-include="'views/templates/_allAdsView.html'" ng-if="!areShowedUserAds"></div>
+
+	<div ng-include="'views/templates/_allUserAdsView.html'" ng-if="areShowedUserAds"></div>
+	
+	<div ng-include="'views/templates/_filterView.html'" ng-if="showFilter"></div>
+
+</div>

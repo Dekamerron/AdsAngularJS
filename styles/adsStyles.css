@@ -6,6 +6,11 @@ html, body {
   background-color: #5b9ad0;
 }
 
+.footer-fixed-position {
+	position: inherit;
+	bottom: 0;
+}
+
 .padding-top-bottom-10 {
 	padding: 10px 0;
 }
@@ -22,8 +27,7 @@ html, body {
 	border-radius: 5px;
 }
 
-.pull-right {
-	float: right;
+.pull-right {	float: right;
 }
 
 .margin-bottom-20 {
@@ -44,6 +48,95 @@ html, body {
 	margin-bottom: -30px; 
 }
 
-.btn {
-	min-width: 80px;
+.wrap-text {
+	word-wrap: break-word;
+}
+
+..droppDownButton {
+    width: 100%;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.dropdown-inline-scrolled-absolute {
+	position: absolute;
+    overflow: scroll;
+    max-height: 250px;
+}
+
+.width-85-percent {
+	width: 85%;
+}
+
+.width-15-percent {
+	width: 15%
+}
+
+.margin-right-btn {
+	margin-left: -1px;
+	border-radius: 0 4px 4px 0;
+}
+
+.margin-left-btn {
+	margin-left: -1px;
+	border-radius: 4px 0 0 4px;
+}
+
+.white-space-normal {
+	white-space: normal;
+}
+
+.fixed-btn-width {
+	width: 130px;
+}
+
+.padding-right-10 {
+	padding-right: 10px;
+}
+
+.dropdown-menu > li > a {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    padding-top: 10px;
+    cursor: pointer;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #fff;
+	margin:2px;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #999;
+	border-radius:4px;
+}
+
+.margin-bottom-50 {
+	margin-bottom: 50px;
+}
+
+.white {
+	margin-left: -15px;
+	width: 120%;
+	height: 30px;
+	background: white;
 }

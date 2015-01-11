@@ -1,0 +1,56 @@
+<div class="col-lg-7 col-md-7">
+	<div class="well" ng-repeat="ad in adsData.ads | filter:townAndCategoryFilter">
+		<div class="row margin-bottom-20 margin-left-right-0">
+			<span ng-bind="ad.title" class="wrap-text"></span>
+			<span class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</span>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<img src="" ng-src="{{ad.imageDataUrl}}" onerror="this.src='images/No_Image_Available.gif'" alt="Ad Photo" width="200" height="200">
+			</div>
+			<div class="col-lg-8">
+				<p class="wrap-text">{{ad.text}}</p>
+				<table class="table">
+					<tr>
+						<td>
+							Name: 
+						</td>
+						<td>
+							<span>{{ad.ownerName}}</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Email: 
+						</td>
+						<td>
+							<a href="mailto:{{ad.ownerEmail}}?Subject={{ad.title}}">{{ad.ownerEmail}}</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Phone: 
+						</td>
+						<td>
+							<span>{{ad.ownerPhone}}</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div ng-if="!noAdsAvailable" class="col-lg-12 padding-top-bottom-10 text-center margin-decrease">
+		<pagination 
+			ng-change="pageChange(currentPageNumber)" 
+			ng-model="currentPageNumber" 
+			page="startPage" 
+			items-per-page="itemsPerPage"  
+			total-items="adsData.numItems">
+		</pagination>	
+	</div>
+	<div ng-if="noAdsAvailable">
+		<h2 class="text-center text-info">
+			No available ads :(
+		</h2>
+	</div>
+</div>
