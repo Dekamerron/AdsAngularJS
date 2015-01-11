@@ -161,3 +161,7 @@ html, body {
 .margin-top-20 {
 	margin-top: 20px;
 }
+
+.min-heigth-800 {
+	min-height: 800px;
+}
