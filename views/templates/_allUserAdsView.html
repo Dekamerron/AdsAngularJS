@@ -1,3 +1,90 @@
-<div class="col-lg-7 col-md-7">
-hi
+<div class="col-lg-10 col-md-10 margin-bottom-50">
+
+	<div class="well" ng-repeat="ad in allUserAds.ads | filter:townAndCategoryFilter">
+
+		<div class="row">
+			<div class="col-lg-9">
+
+				<div class="row">
+					<div class="col-lg-12">
+						<h4 class="wrap-text">
+							{{ad.title}}
+							<span class="pull-right font-size-15">{{ad.date | date:'d-MMM-yyyy'}}</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4">
+						<img src="" ng-src="{{ad.imageDataUrl}}" onerror="this.src='images/No_Image_Available.gif'" alt="Ad Photo" width="200" height="200">
+					</div>
+					<div class="col-lg-8">
+						<p class="wrap-text">{{ad.text}}</p>
+						<table class="table">
+							<tr>
+								<td>Category: </td>
+								<td>
+									<span>{{ad.categoryName}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td>Town: </td>
+								<td>
+									{{ad.townName}}
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-lg-3">
+				<fieldset class="text-center">
+					<legend>Status</legend>
+					<p>
+						{{ad.status}}
+					</p>
+					<div ng-if="ad.status == 'Published' || ad.status == 'WaitingApproval'">
+						<p>
+							<button class="btn btn-primary fixed-btn-width" ng-click="deactivateAd(ad)">Deactivate</button>	
+						</p>
+					</div>
+					<div ng-if="ad.status == 'Inactive'">
+						<p>
+							<button class="btn btn-primary fixed-btn-width" ng-click="redirectToEditAdView(ad)">Edit</button>
+						</p>
+						<p>
+							<button class="btn btn-primary fixed-btn-width">Publish again</button>
+						</p>
+						<p>
+							<button class="btn btn-primary fixed-btn-width" ng-click="deleteAd(ad.id)">Delete</button>
+						</p>
+					</div>
+					<div ng-if="ad.status == 'Rejected'">
+						<p>
+							<button class="btn btn-primary fixed-btn-width">Publish again</button>
+						</p>
+					</div>
+				</fieldset>
+			</div>
+
+		</div>
+	</div>
+
+	<div ng-if="!noAdsAvailable" class="col-lg-12 padding-top-bottom-10 text-center margin-decrease">
+		<pagination 
+			ng-change="pageChange(currentPageNumber)" 
+			ng-model="currentPageNumber" 
+			page="startPage"
+			items-per-page="itemsPerPage"  
+			total-items="allUserAds.numItems"
+			max-size="10">
+		</pagination>	
+	</div>
+	<div ng-if="noAdsAvailable">
+		<h2 class="text-center text-info">
+			No available ads :(
+		</h2>
+	</div>
 </div>

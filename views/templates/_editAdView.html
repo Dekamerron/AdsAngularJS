@@ -1,0 +1,85 @@
+<div class="col-lg-10 col-md-10 margin-bottom-50">
+	<fieldset>
+		<legend class="text-center">Edit ad</legend>
+		<div class="col-lg-8">
+			<form data-toggle="validator" class="form-horizontal" name="editAdForm" role="form" novalidate="novalidate">
+			<div class="form-group required">
+			  <label for="adTitle" class="col-lg-2 control-label">Title</label>
+				<div class="col-lg-10">
+			    	<input ng-model="currentAd.title" type="text" class="form-control" id="adTitle" placeholder="Ad Title" required>
+				</div>
+			</div>
+			<div class="form-group required">
+				<label for="adText" class="col-lg-2 control-label control-label">Text</label>
+				<div class="col-lg-10">
+					<textarea ng-model="$parent.currentAd.text" cols="65" rows="10" class="resize-vertical"></textarea>
+				</div>
+			</div>
+			<div class="form-group required">
+				<label for="adImage" class="col-lg-2 control-label">Image</label>
+			  	<div class="col-lg-10">
+			    	<input fileread="currentAd.imageDataUrl" type="file" class="form-control" id="adImage" 
+			    	placeholder="Select Image" required>
+			  	</div>
+			</div>
+			<div class="form-group required">
+				<label for="town" class="col-lg-2 control-label">Town</label>
+			  	<div class="col-lg-10">
+					<div class="btn-group droppDownButton fullWidth">
+		                <div data-toggle="dropdown" class="input-group fullWidth">
+		                    <button ng-model="currentAd.categoryName" type="button" class="btn btn-primary width-85-percent margin-left-btn white-space-normal">
+		                            {{currentAd.categoryName}}
+		                    </button>
+		                    <button type="button" class="btn btn-primary dropdown-toggle width-15-percent margin-right-btn">
+		                        <span class="caret"></span>
+		                        <span class="sr-only">Toggle Dropdown</span>
+		                    </button>
+		                </div>
+		                <ul class="dropdown-menu dropdown-inline-scrolled-absolute fullWidth" role="menu">
+		                    <li ng-repeat="category in categoriesForEdit" class="dropDownItemBorder">
+		                        <a ng-click="selectCategoryForEdit(category)">{{category.name}}</a>
+		                    </li>
+		                </ul>
+		            </div>
+			  	</div>
+			</div>
+			<div class="form-group required">
+				<label for="town" class="col-lg-2 control-label">Town</label>
+			  	<div class="col-lg-10">
+					<div class="btn-group droppDownButton fullWidth">
+		                <div data-toggle="dropdown" class="input-group fullWidth">
+		                    <button ng-model="currentAd.townName" type="button" class="btn btn-primary width-85-percent margin-left-btn white-space-normal">
+		                            {{currentAd.townName}}
+		                    </button>
+		                    <button type="button" class="btn btn-primary dropdown-toggle width-15-percent margin-right-btn">
+		                        <span class="caret"></span>
+		                        <span class="sr-only">Toggle Dropdown</span>
+		                    </button>
+		                </div>
+		                <ul class="dropdown-menu dropdown-inline-scrolled-absolute fullWidth" role="menu">
+		                    <li ng-repeat="town in townsForEdit" class="dropDownItemBorder">
+		                        <a ng-click="selectTownForEdit(town)">{{town.name}}</a>
+		                    </li>
+		                </ul>
+		            </div>
+			  	</div>
+			</div>
+
+			<div class="form-group">
+			    <div class="col-lg-offset-4 col-md-offset-4 col-lg-10 col-md-10 margin-bottom-50">
+			    	<button ng-click="cancel()" type="btn" class="btn btn-default">Cancel</button>
+			    	<button ng-click="editAd()" type="btn" class="btn btn-primary" ng-disabled="editAdForm.$invalid">Edit</button>
+			    </div>
+			</div>
+		</form>
+		</div>
+
+		<div class="col-lg-4 text-center">
+			<img src="" ng-src="{{currentAd.imageDataUrl}}" onerror="this.src='images/No_Image_Available.gif'" alt="Ad Photo" width="200" height="200">
+			<div class="margin-top-20">
+				<button class="btn btn-primary" ng-click="deleteImage()">Delete Image</button>
+			</div>
+		</div>
+
+	</fieldset>
+</div>

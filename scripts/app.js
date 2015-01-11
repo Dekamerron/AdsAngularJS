@@ -8,67 +8,44 @@ app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
 		.when('/', {
 			templateUrl: 'views/home.html',
-			controller: 'AdsController'
+			controller: 'AdsController',
+			isLogin: true
 		})
 		.when('/login', {
 			templateUrl: 'views/login.html',
-			controller: 'AdsController'
+			controller: 'AdsController',
+			isLogin: true
 		})
 		.when('/register', {
 			templateUrl: 'views/register.html',
-			controller: 'AdsController'
+			controller: 'AdsController',
+			isLogin: true
 		})
 		.when('/user/home', {
 			templateUrl: 'views/userHome.html',
-			controller: 'UserController'
+			controller: 'UserController',
+			isLogin: false
+		})
+		.when('/user/ads', {
+			templateUrl: 'views/userAds.html',
+			controller: 'UserController',
+			isLogin: false
+		})
+		.when('/user/ads/edit/:id', {
+			templateUrl: 'views/userEditAd.html',
+			controller: 'UserController',
+			isLogin: false
 		})
 		.otherwise({
 			redirectTo: '/'
 		});
 
-		// window.routes = {
-		//     "/": { 
-		//         templateUrl: 'views/home.html',
-		// 		controller: 'AdsController',
-		// 		requireLogin: false
-		// 	},
-		//     "/login": {
-		//     	templateUrl: 'views/login.html',
-		// 		controller: 'AdsController',
-		//         requireLogin: true
-		//     },
-		//     "/register": { 
-		//     	templateUrl: 'views/register.html',
-		// 		controller: 'AdsController',
-		//         requireLogin: false
-		// 	},
-		// 	"/user/home": {
-		// 		templateUrl: 'views/userHome.html',
-		// 		controller: 'UserController',
-		//         requireLogin: true
-		// 	}
-		// };
+		// $rootScope.$on('$routeChangeStart', function (event, next) {
+	 //        var userAuthenticated = ...; 
 
-		// for(var path in window.routes) {
-	 //        $routeProvider.when(path, window.routes[path]);
-	 //    }
+	 //        if (!userAuthenticated && !next.isLogin) {
 
-	 //    $routeProvider.otherwise({redirectTo: '/'});
-
-		// }]).run(function(){
-		// 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-	 //        for(var i in window.routes) {
-	 //            if(next.indexOf(i) != -1) {
-	 //                if(window.routes[i].requireLogin && !authenticationService.isLoggedIn()) {
-	 //                    alert("You need to be authenticated to see this page!");
-	 //                    event.preventDefault();
-	 //                }
-	 //            }
+	 //            $location.path('/User/LoginUser');
 	 //        }
 	 //    });
-	    
-
-		
-		// localStorageServiceProvider.setPrefix('adsApp');
-	 //    localStorageServiceProvider.setStorageType('localStorage');
 }]);

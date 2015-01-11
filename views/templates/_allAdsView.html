@@ -12,25 +12,19 @@
 				<p class="wrap-text">{{ad.text}}</p>
 				<table class="table">
 					<tr>
-						<td>
-							Name: 
-						</td>
+						<td>Name: </td>
 						<td>
 							<span>{{ad.ownerName}}</span>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							Email: 
-						</td>
+						<td>Email: </td>
 						<td>
 							<a href="mailto:{{ad.ownerEmail}}?Subject={{ad.title}}">{{ad.ownerEmail}}</a>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							Phone: 
-						</td>
+						<td>Phone: </td>
 						<td>
 							<span>{{ad.ownerPhone}}</span>
 						</td>
@@ -45,7 +39,8 @@
 			ng-model="currentPageNumber" 
 			page="startPage" 
 			items-per-page="itemsPerPage"  
-			total-items="adsData.numItems">
+			total-items="adsData.numItems"
+			max-size="10">
 		</pagination>	
 	</div>
 	<div ng-if="noAdsAvailable">

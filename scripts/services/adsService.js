@@ -1,7 +1,7 @@
 'use strict';
 
-app.factory('adsService', ['$resource', '$http', '$q', 'baseServiceUrl', 
-	function ($resource, $http, $q, baseServiceUrl) {
+app.factory('adsService', ['$resource', 'baseServiceUrl', 'authenticationService',
+	function ($resource, baseServiceUrl, authenticationService) {
 
 	var adsResource = $resource(baseServiceUrl + 'ads:adId', { adId: '@id'}, {
 		update: {
@@ -12,11 +12,6 @@ app.factory('adsService', ['$resource', '$http', '$q', 'baseServiceUrl',
 	function getAllPublicAds () {
 		return adsResource.get();
 	}
-
-	// function getAllUserAds () {
-	// var userAdsResource = $resource(baseServiceUrl + 'user/ads');
-	// 	return userAdsResource
-	// }
 
 	function getAllAdsWithFilter (townId, categoryId) {
 		var urlString = '';
@@ -50,20 +45,8 @@ app.factory('adsService', ['$resource', '$http', '$q', 'baseServiceUrl',
 		return adsWithPagingResource.get();
 	}
 
-	function editAd (adId, ad) {
-		return adsResource.update({ id: adId }, ad); 
-	}
-
-	function getAdDyId (adId) {
-		return adsResource.get({ id: adId });
-	}
-
 	function addAd (ad) {
 		return adsResource.save(ad);
-	}
-
-	function deleteAd (adId)  {
-		return adsResource.delete({ id: adId});
 	}
 
 	function getAllCategories () {
@@ -76,15 +59,124 @@ app.factory('adsService', ['$resource', '$http', '$q', 'baseServiceUrl',
 		return townResource.query();
 	}
 
+	function getAllUserAds () {
+		var userAccessToken = authenticationService.getHeaders();
+		var userAdsResource = $resource(baseServiceUrl + 'user/ads', {}, {
+			get: {
+				method: 'GET',
+				isArray:false,
+				headers: {
+					'Authorization': userAccessToken.Authorization
+				}
+			}
+		});
+
+		return userAdsResource.get();
+	}
+
+	function getAllAdsWithPaginingAndStatusForCurrentUser (pageSize, startPage, status) {
+		var userAccessToken = authenticationService.getHeaders();
+		var urlString = 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage;
+
+		if (status) {
+			urlString += '&status=' + status;
+		}
+
+		var adsWithPagingResourceForUser = $resource(baseServiceUrl + urlString, {}, {
+			get: {
+				method: 'GET',
+				isArray: false,
+				headers: {
+					'Authorization': userAccessToken.Authorization
+				}
+			}
+		});
+		
+		return adsWithPagingResourceForUser.get();
+	}
+
+	function deactivateAd (ad) {
+		var urlString =  'user/ads/deactivate/' + ad.id;
+		var userAccessToken = authenticationService.getHeaders();
+
+		var deactivateAd = $resource(baseServiceUrl + urlString, {}, {
+			update: {
+				method: 'PUT',
+				isArray: false,
+				headers: {
+					'Authorization': userAccessToken.Authorization
+				}
+			}
+		});
+		
+		return deactivateAd.update();
+	}
+
+	function getAdById (id) {
+		var urlString =  'user/ads/' + id;
+		var userAccessToken = authenticationService.getHeaders();
+
+		var editAd = $resource(baseServiceUrl + urlString, {}, {
+			get: {
+				method: 'GET',
+				isArray: false,
+				headers: {
+					'Authorization': userAccessToken.Authorization
+				}
+			}
+		});
+		
+		return editAd.get();
+	}
+
+	function editAd (adId, ad) {
+		var urlString =  'user/ads/' + adId;
+		var userAccessToken = authenticationService.getHeaders();
+
+		var editAd = $resource(baseServiceUrl + urlString, {}, {
+			update: {
+				method: 'PUT',
+				isArray: false,
+				headers: {
+					'Authorization': userAccessToken.Authorization
+				}
+			}
+		});
+
+		return editAd.update({}, ad); 
+	}
+
+	function deleteAd (adId)  {
+		// return adsResource.delete({ id: adId });
+		var urlString =  'user/ads/' + adId;
+		var userAccessToken = authenticationService.getHeaders();
+
+		var deleteAd = $resource(baseServiceUrl + urlString, {}, {
+			delete: {
+				method: 'DELETE',
+				isArray: false,
+				headers: {
+					'Authorization': userAccessToken.Authorization
+				}
+			}
+		});
+
+		return deleteAd.delete();
+	}
+
 	return {
-		getAllCategories: getAllCategories,
-		getAllTowns: getAllTowns,
-		getAllPublicAds: getAllPublicAds,
-		editAd: editAd,
-		getAdDyId: getAdDyId,
-		addAd: addAd,
-		deleteAd: deleteAd,
+		getAllAdsWithPaginingAndStatusForCurrentUser: getAllAdsWithPaginingAndStatusForCurrentUser,
 		getAllAdsWithPagingAndFilter: getAllAdsWithPagingAndFilter,
-		getAllAdsWithFilter: getAllAdsWithFilter
+		getAllAdsWithFilter: getAllAdsWithFilter,
+		getAllCategories: getAllCategories,
+		getAllPublicAds: getAllPublicAds,
+		getAllUserAds: getAllUserAds,
+		deactivateAd: deactivateAd,
+		getAllTowns: getAllTowns,
+		getAdById: getAdById,
+		deleteAd: deleteAd,		
+		editAd: editAd,		
+		addAd: addAd,
+
 	}
 }]);

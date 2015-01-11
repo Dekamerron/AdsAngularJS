@@ -1,8 +1,8 @@
 'use strict';
 
 app.controller('AdsController', 
-	['$scope', '$location', 'adsService', 'userService', 'authenticationService',
-	function ($scope, $location, adsService, userService, authenticationService) {
+	['$scope', '$location', '$rootScope', 'adsService', 'userService', 'authenticationService',
+	function ($scope, $location, $rootScope, adsService, userService, authenticationService) {
 	
 	$scope.user = {};
 	$scope.loginInfo = {};
@@ -19,8 +19,8 @@ app.controller('AdsController',
 	$scope.itemsPerPage = 10;
 
 	$scope.currentCategory = { id: 0, name: 'All categories' };
-	$scope.currentTown = { id: 0, name: "All towns" };
-	$scope.currentRegisterTown = { id: 0, name: "Please Select Town" };
+	$scope.currentTown = { id: 0, name: 'All towns' };
+	$scope.currentRegisterTown = { id: 0, name: 'Please Select Town' };
 
 	$scope.reloadAds = function (pageNumber) {
 		adsService.getAllAdsWithPagingAndFilter($scope.pageSize, pageNumber, $scope.currentTown.id, $scope.currentCategory.id)
@@ -56,12 +56,9 @@ app.controller('AdsController',
 	.then(function (data) {
 		$scope.registerTowns = JSON.parse(JSON.stringify(data));
 		$scope.towns = JSON.parse(JSON.stringify(data));		
-		$scope.towns.unshift({ id: 0, name: "All towns" });
+		$scope.towns.unshift({ id: 0, name: 'All towns' });
 		$scope.currentTown = $scope.towns[0];
 	});
-
-
-	
 
 	adsService.getAllCategories()
 	.$promise
@@ -93,10 +90,10 @@ app.controller('AdsController',
 		.then(function () {
 			$scope.currentPage = 'Login';
 			$scope.loginInfo = {};
-			$scope.successMessage("Register success");
+			$scope.successMessage('Register success');
 			$location.path('/login');
 		}, function(error) {
-		    $scope.errorMessage("Register failed. " + error.data.message);
+		    $scope.errorMessage('Register failed. ' + error.data.message);
 		});
 	};
 
@@ -110,11 +107,11 @@ app.controller('AdsController',
 			$scope.currentCategory = $scope.categories[0];
 			$scope.currentTown = $scope.towns[0];
 			$scope.reloadAds(1);
-			$scope.successMessage("Login success");
+			$scope.successMessage('Login success');
 			$scope.isLoggedIn = true;
 			$location.path('/user/home');
 		}, function(error) {
-		    $scope.errorMessage("Login failed. " + error.data.error_description);
+		    $scope.errorMessage('Login failed. ' + error.data.error_description);
 		});
 	};
 
@@ -123,7 +120,7 @@ app.controller('AdsController',
 		$scope.currentCategory = $scope.categories[0];
 		$scope.currentTown = $scope.towns[0];
 		$scope.reloadAds(1);
-		$scope.successMessage("Logout success");
+		$scope.successMessage('Logout success');
 		$scope.isLoggedIn = false;
 		$scope.redirectToHome();
 	};
@@ -179,4 +176,16 @@ app.controller('AdsController',
 			$scope.noAdsAvailable = false;
 		}
 	});
+
+	$rootScope.$on('$routeChangeStart', function (event, next) {
+        var userAuthenticated = authenticationService.isLoggedIn(); 
+
+        if (!userAuthenticated && !next.isLogin) {
+
+            $location.path('/');
+        } else if (userAuthenticated && next.isLogin) {
+        	
+        	$location.path('/user/home');
+        }
+    });
 }]);

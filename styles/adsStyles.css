@@ -140,3 +140,24 @@ html, body {
 	height: 30px;
 	background: white;
 }
+
+.margin-ignore {
+	margin: 0;
+}
+
+.font-size-15 {
+	font-size: 15px
+}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+.resize-vertical {
+	resize: vertical;	
+}
+
+.margin-top-20 {
+	margin-top: 20px;
+}
