@@ -15,8 +15,8 @@ app.controller('AdsController',
 
 	$scope.currentPageNumber = 1;
 	$scope.startPage = 1;
-	$scope.pageSize = 10;
-	$scope.itemsPerPage = 10;
+	$scope.pageSize = 2;
+	$scope.itemsPerPage = 2;
 
 	$scope.currentCategory = { id: 0, name: 'All categories' };
 	$scope.currentTown = { id: 0, name: 'All towns' };

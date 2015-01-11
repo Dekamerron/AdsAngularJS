@@ -74,7 +74,7 @@
 
 	<div ng-if="!noAdsAvailable" class="col-lg-12 padding-top-bottom-10 text-center margin-decrease">
 		<pagination 
-			ng-change="pageChange(currentPageNumber)" 
+			ng-change="pageChange(currentPageNumber, true)" 
 			ng-model="currentPageNumber" 
 			page="startPage"
 			items-per-page="itemsPerPage"  

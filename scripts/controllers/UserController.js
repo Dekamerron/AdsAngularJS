@@ -50,7 +50,7 @@ app.controller('UserController',
 			.$promise
 			.then(function (data) {
 				$scope.allUserAds = data;
-				console.log(data);
+				// console.log(data);
 			});
 		};
 
@@ -124,9 +124,19 @@ app.controller('UserController',
 			$scope.getAds(2, 1, $scope.adStatus);
 		};
 
-		$scope.pageChange = function (pageNumber) {
-			$scope.getAds(2, pageNumber, $scope.adStatus);
-			$scope.currentPageNumber = pageNumber;
+		$scope.pageChange = function (pageNumber, isUserAds) {
+			if (isUserAds) {
+				$scope.getAds(2, pageNumber, $scope.adStatus);
+				$scope.currentPageNumber = pageNumber;
+			} else {
+				$scope.adStatus = '';
+				adsService.getAllAdsWithPagingAndFilter ($scope.pageSize, pageNumber, 0, 0)
+				.$promise
+				.then(function (data) {
+					$scope.adsData = data;
+					// console.log(data);
+				});
+			}
 		};
 
 		$scope.deactivateAd = function (ad) {
@@ -172,11 +182,12 @@ app.controller('UserController',
 		};
 
 		$scope.editAd = function () {
+			$scope.currentAd.changeImage = true;
 			adsService.editAd($scope.currentAdId, $scope.currentAd)
 			.$promise
 			.then(function (data) {
 				$scope.successMessage('Advertisement #' + $scope.currentAdId + ' edited successfully.');
-				$location.path('user/userAds');
+				$location.path('user/ads');
 			}, function(error) {
 			    $scope.errorMessage('Ad failed to edit. ' + error.data.message);
 			});
@@ -187,14 +198,14 @@ app.controller('UserController',
 			.$promise
 			.then(function (data) {
 				$scope.successMessage('Advertisement #' + adId + ' deleted successfully.');
-				$location.path('user/userAds');
+				$location.path('user/ads');
 			}, function(error) {
 			    $scope.errorMessage('Ad failed to delete. ' + error.data.message);
 			});
 		};
 
 		$scope.deleteImage = function () {
-			$scope.currentAd.imageDataUrl = null;
+			$scope.currentAd.imageDataUrl = '';
 		}
 
 		$scope.$watch('allUserAds', function () {
@@ -255,4 +266,11 @@ app.controller('UserController',
 				// console.log(data);
 			});
 		};
+
+		$scope.$watch('allUserAds', function () {
+			if ($scope.allUserAds) {
+				console.log($scope.allUserAds.ads);
+			}
+			
+		});
 }]);

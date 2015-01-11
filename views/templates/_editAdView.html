@@ -19,7 +19,7 @@
 				<label for="adImage" class="col-lg-2 control-label">Image</label>
 			  	<div class="col-lg-10">
 			    	<input fileread="currentAd.imageDataUrl" type="file" class="form-control" id="adImage" 
-			    	placeholder="Select Image" required>
+			    	placeholder="Select Image">
 			  	</div>
 			</div>
 			<div class="form-group required">
@@ -75,7 +75,11 @@
 		</div>
 
 		<div class="col-lg-4 text-center">
-			<img src="" ng-src="{{currentAd.imageDataUrl}}" onerror="this.src='images/No_Image_Available.gif'" alt="Ad Photo" width="200" height="200">
+			<img src="" ng-src="{{currentAd.imageDataUrl}}" onerror="this.src='images/No_Image_Available.gif'" alt="Ad Photo" width="200" height="200" ng-if="currentAd.imageDataUrl">
+
+			<img src="" onerror="this.src='images/No_Image_Available.gif'" alt="Ad Photo" width="200" height="200" 
+			ng-if="!currentAd.imageDataUrl">
+
 			<div class="margin-top-20">
 				<button class="btn btn-primary" ng-click="deleteImage()">Delete Image</button>
 			</div>

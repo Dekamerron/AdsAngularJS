@@ -76,22 +76,25 @@ app.factory('adsService', ['$resource', 'baseServiceUrl', 'authenticationService
 
 	function getAllAdsWithPaginingAndStatusForCurrentUser (pageSize, startPage, status) {
 		var userAccessToken = authenticationService.getHeaders();
-		var urlString = 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage;
+		var urlString = '';
 
 		if (status) {
-			urlString += '&status=' + status;
+			urlString += 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage + '&status=' + status;
+			
+		} else {
+			urlString += 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage;
 		}
 
 		var adsWithPagingResourceForUser = $resource(baseServiceUrl + urlString, {}, {
-			get: {
-				method: 'GET',
-				isArray: false,
-				headers: {
-					'Authorization': userAccessToken.Authorization
+				get: {
+					method: 'GET',
+					isArray: false,
+					headers: {
+						'Authorization': userAccessToken.Authorization
+					}
 				}
-			}
 		});
-		
+
 		return adsWithPagingResourceForUser.get();
 	}
 
